@@ -11,6 +11,22 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   int _pessoa = 0;
+  String _infoText = "Pode entrar";
+
+
+  void _changePeople(int delta){
+    setState(() {
+      _pessoa+=delta;
+
+      if(_pessoa<0){
+        _infoText="Mundo invertido?!";
+      }else if(_pessoa<=10){
+        _infoText="Pode entrar";
+      }else{
+        _infoText="Lotado!!!";
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +56,9 @@ class _homeState extends State<home> {
                           style: TextStyle(
                               color: Colors.orange,
                               fontWeight: FontWeight.bold,
-                              fontSize: 30)),
+                              fontSize: 15)),
                       onPressed: () {
-                        debugPrint("mais 1");
+                        _changePeople(1);
                       }),
                 ),
                 Padding(
@@ -52,19 +68,19 @@ class _homeState extends State<home> {
                           style: TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold,
-                              fontSize: 30)),
+                              fontSize: 15)),
                       onPressed: () {
-                        debugPrint("menos 1");
+                        _changePeople(-1);
                       }),
                 ),
               ],
             ),
             Text(
-              "",
+              _infoText,
               style: TextStyle(
                   color: Colors.orange,
                   fontWeight: FontWeight.bold,
-                  fontSize: 1),
+                  fontSize: 15),
             ),
           ],
         )
